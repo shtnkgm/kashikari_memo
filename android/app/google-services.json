@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "575932692589",
+    "project_id": "kashikari-memo-5f2bb",
+    "storage_bucket": "kashikari-memo-5f2bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575932692589:android:fd08ca70ced0812f7c2764",
+        "android_client_info": {
+          "package_name": "com.example.kashikari_memo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575932692589-kj594ik2acmctorj5sq3mkt5tjphh08c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw0q09JVKJxQAPw6lqCeGUigSxflVpAKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575932692589-kj594ik2acmctorj5sq3mkt5tjphh08c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
