@@ -1,3 +1,4 @@
+// import 'dart:html';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -55,7 +56,7 @@ class _MyList extends State<List> {
             context,
             MaterialPageRoute(
                 settings: const RouteSettings(name: "/new"),
-                builder: (BuildContext context) => InputForm()
+                builder: (BuildContext context) => InputForm(null)
             ),
           );
         },
@@ -79,6 +80,13 @@ class _MyList extends State<List> {
                 FlatButton(child: const Text('編集'),
                 onPressed: (){
                   print("編集ボタンを押しました");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        settings: const RouteSettings(name: "/edit"),
+                        builder: (BuildContext context) => InputForm(document)
+                    ),
+                  );
                 }),
               ],
             ),
@@ -90,6 +98,9 @@ class _MyList extends State<List> {
 }
 
 class InputForm extends StatefulWidget {
+  InputForm(this.document);
+  final DocumentSnapshot document;
+
   @override
   _MyInputFormState createState() => _MyInputFormState();
 }
@@ -124,6 +135,17 @@ class _MyInputFormState extends State<InputForm> {
   Widget build(BuildContext context) {
     DocumentReference _mainReference;
     _mainReference = FirebaseFirestore.instance.collection('kashikari-memo').doc();
+
+    if (widget.document != null) {
+      if (_data.user == null && _data.stuff == null) {
+        _data.borrowOrLend = widget.document['borrowOrLend'];
+        _data.user = widget.document['user'];
+        _data.stuff = widget.document['stuff'];
+        _data.date = widget.document['date'].toDate();
+      }
+
+      _mainReference = FirebaseFirestore.instance.collection('kashikari-memo').doc(widget.document.id);
+    }
 
     return Scaffold(
       appBar: AppBar(
