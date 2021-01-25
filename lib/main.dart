@@ -1,4 +1,3 @@
-// import 'dart:html';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -136,7 +135,10 @@ class _MyInputFormState extends State<InputForm> {
     DocumentReference _mainReference;
     _mainReference = FirebaseFirestore.instance.collection('kashikari-memo').doc();
 
+    bool canDelete = false;
+
     if (widget.document != null) {
+      // 既にデータが存在する場合
       if (_data.user == null && _data.stuff == null) {
         _data.borrowOrLend = widget.document['borrowOrLend'];
         _data.user = widget.document['user'];
@@ -145,6 +147,7 @@ class _MyInputFormState extends State<InputForm> {
       }
 
       _mainReference = FirebaseFirestore.instance.collection('kashikari-memo').doc(widget.document.id);
+      canDelete = true;
     }
 
     return Scaffold(
@@ -172,8 +175,10 @@ class _MyInputFormState extends State<InputForm> {
               ),
           IconButton(
               icon: Icon(Icons.delete),
-              onPressed: () {
+              onPressed: !canDelete? null:() {
                 print("削除ボタンを押しました");
+                _mainReference.delete();
+                Navigator.pop(context);
               }
           ),
         ],
